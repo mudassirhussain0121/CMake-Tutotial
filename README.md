@@ -144,3 +144,76 @@ OR
 # Build will be created with this name (${PROJECT_NAME})
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 ```  
+
+## Cmake Variables
+
+- Project Information Variables:
+
+```sh
+Variable              Description                                               Example
+
+PROJECT_NAME	      Name of the most recent project() call.	                "MyProject"
+PROJECT_SOURCE_DIR    Full path to the source directory of the project.	        /home/user/my_project
+PROJECT_BINARY_DIR    Full path to the build directory (where cmake runs).      /home/user/my_project/build
+CMAKE_PROJECT_NAME    Name of the top-level project (useful in subprojects).    "MyProject"
+```
+
+- Directory Paths:
+
+```sh
+Variable                    Description                                        Example
+
+CMAKE_SOURCE_DIR            Path to the top-level source directory.            /home/user/my_project
+CMAKE_BINARY_DIR            Path to the top-level build directory.             /home/user/my_project/build
+CMAKE_CURRENT_SOURCE_DIR    Path to the current CMakeLists.txt's directory.    /home/user/my_project/src
+CMAKE_CURRENT_BINARY_DIR    Build directory for the current CMakeLists.txt.    /home/user/my_project/build/src
+```
+
+- System & Compiler Info:
+
+```sh
+Variable              Description                                         Example
+
+CMAKE_SYSTEM_NAME     Operating system (e.g., Linux, Windows, Darwin).    "Linux"
+CMAKE_C_COMPILER      Path to the C compiler.                             /usr/bin/gcc
+CMAKE_CXX_COMPILER    Path to the C++ compiler.                           /usr/bin/g++
+CMAKE_BUILD_TYPE      Build type (Debug, Release, RelWithDebInfo).        "Debug"
+```
+
+- Build Control Variables:
+
+```sh
+Variable                Description                                     Example
+
+CMAKE_CXX_FLAGS         C++ compiler flags.                             "-Wall -Wextra"
+CMAKE_INSTALL_PREFIX    Installation prefix (/usr/local by default).    "/opt/my_project"
+CMAKE_MODULE_PATH       Paths to search for CMake modules.              "/path/to/custom/modules"
+```
+
+- Generator-Specific Variables:
+
+```sh
+Variable              Description                                             Example
+
+CMAKE_GENERATOR       Build system generator (e.g., Unix Makefiles, Ninja).    "Unix Makefiles"
+CMAKE_MAKE_PROGRAM    Path to the build tool (e.g., make, ninja).              /usr/bin/ninja
+```
+
+- Platform-Specific Variables:
+
+```sh
+Variable    Description                                          Example
+
+WIN32       TRUE on Windows systems.                             FALSE (Linux)
+APPLE       TRUE on macOS/iOS.                                   TRUE (macOS)
+UNIX        TRUE on Linux, macOS, or other Unix-like systems.    TRUE
+```
+
+- Dependency Management:
+
+```sh
+Variable               Description                                         Example
+
+CMAKE_PREFIX_PATH      Paths to search for dependencies.                   "/usr/local;/opt/libs"
+<PackageName>_FOUND    TRUE if a package is found (e.g., OpenCV_FOUND).    TRUE
+```
