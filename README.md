@@ -20,6 +20,18 @@ It doesn’t build the project directly—instead, it generates build files (lik
 	- Running tasks in parallel (uses multiple CPU cores).
     - Only rebuilding files that changed (incremental builds).
     - Being lightweight (no fancy UI, just raw speed).
+	
+## Project Structure
+
+```sh
+my_project/
+├── CMakeLists.txt
+├── api/
+│   └── hello.h
+├── src/
+│   └── main.c
+└── build/
+```
 
 ## Step-by-Step Guide to Writing CMake Scripts (CMakeLists.txt)
 Create a file `CMakeLists.txt` at the root of project. Following are the commands to create a basic Cmake file to build the project.
