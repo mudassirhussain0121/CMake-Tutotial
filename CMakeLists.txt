@@ -53,6 +53,10 @@ include_directories( ${PROJECT_INCLUDES}   # Needed to find include files '.h'.
 # 	- Build type (Debug/Release)
 
 
+# Set Build type as Debug.
+set(CMAKE_BUILD_TYPE "Debug"
+)
+
 # Set output directory. 
 # Creates a path like: [project_root]/bin/Windows64/Debug.
 # 
@@ -62,7 +66,7 @@ include_directories( ${PROJECT_INCLUDES}   # Needed to find include files '.h'.
 # 	 - ${CMAKE_SYSTEM_NAME} = OS name (Windows, Linux, Darwin for Mac).
 #  	 - ${OSBitness} = Your custom variable for 32/64-bit (likely "32" or "64").
 # 	 - ${CMAKE_BUILD_TYPE} = Debug/Release/RelWithDebInfo.
-#set(FullOutputDir "${CMAKE_SOURCE_DIR}/bin/${CMAKE_SYSTEM_NAME}${OSBitness}/${CMAKE_BUILD_TYPE}")
+# set(FullOutputDir "${CMAKE_SOURCE_DIR}/bin/${CMAKE_SYSTEM_NAME}${OSBitness}/${CMAKE_BUILD_TYPE}")
 set(FullOutputDir "${CMAKE_SYSTEM_NAME}${OSBitness}/${CMAKE_BUILD_TYPE}")
 
 # ARCHIVE_OUTPUT_DIRECTORY = Where static libraries (.lib/.a) go.
@@ -81,8 +85,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${FullOutputDir}")
 # Add executable target.
 #add_executable(${PROJECT_NAME} src/main.cpp)
 
+# OR
+
 # Add the executable.
-# It just required executable name (Which is Project name in here) and Source includes.
+# It just required executable name (Which is Project name here) and Source includes.
 # Build will be created with this name (${PROJECT_NAME}).
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 

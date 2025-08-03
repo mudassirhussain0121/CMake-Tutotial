@@ -20,6 +20,18 @@ It doesn’t build the project directly—instead, it generates build files (lik
 	- Running tasks in parallel (uses multiple CPU cores).
     - Only rebuilding files that changed (incremental builds).
     - Being lightweight (no fancy UI, just raw speed).
+	
+## Project Structure
+
+```
+my_project/
+├── CMakeLists.txt
+├── api/
+│   └── hello.h
+├── src/
+│   └── main.c
+└── build/
+```
 
 ## Step-by-Step Guide to Writing CMake Scripts (CMakeLists.txt)
 Create a file `CMakeLists.txt` at the root of project. Following are the commands to create a basic Cmake file to build the project.
@@ -36,7 +48,7 @@ Create a file `CMakeLists.txt` at the root of project. Following are the command
 			- Languages (LANGUAGES) used (e.g., C, CXX, Fortran).
 	- This command should be called soon after `cmake_minimum_required()`.
 	
-```sh
+```
 project(<PROJECT-NAME>
 	[VERSION <major>[.<minor>[.<patch>[.<tweak>]]]]
 	[DESCRIPTION <project-description>]
@@ -46,7 +58,7 @@ project(<PROJECT-NAME>
 
 Example 1:  
 	
-```sh
+```
 project(CMAKE_LEARNING) 
 
 project(${PROJECT_NAME} VERSION 1.2)
@@ -54,7 +66,7 @@ project(${PROJECT_NAME} VERSION 1.2)
 
 Example 2: Can be define in one command.  
 
-```sh	
+```
 project(CMAKE_LEARNING
         VERSION 1.2
 )
@@ -64,7 +76,7 @@ project(CMAKE_LEARNING
 	- The `set()` command is used to define variables in CMake.
 	- Variables can store strings, lists, paths, or boolean values, and they control how your project is configured, built, and installed.
 
-```sh	
+```
 set(<variable> <value>... [PARENT_SCOPE])
 
 * <variable>: Name of the variable to set (case-sensitive).
@@ -72,7 +84,7 @@ set(<variable> <value>... [PARENT_SCOPE])
 * [PARENT_SCOPE] (Optional): Propagates the variable to the parent scope (useful in functions/subdirectories).
 ```  
 
-```sh
+```
 Example: Setting Simple Variables:
 
 set(MY_NAME "John Doe")   # String
@@ -84,7 +96,7 @@ Example 1: In the following example, creates a CMake variable named `PROJECT_INC
 	- Defines a variable: `PROJECT_INCLUDES` now holds the path to the `api/ subdirectory` in your project.  
 	- `PROJECT_SOURCE_DIR`: This is a CMake-builtin variable pointing to your project’s root (where the top-level CMakeLists.txt lives).  
 
-```sh
+```
 # Add include directory.
 set( PROJECT_INCLUDES
      ${PROJECT_SOURCE_DIR}/api
@@ -93,7 +105,7 @@ set( PROJECT_INCLUDES
 
 Example 2: `PROJECT_SOURCES` is variable name and `${PROJECT_SOURCE_DIR}/src/main.cpp` is th value assigned to it.
 
-```sh
+```
 # Add all the source files.
 set( PROJECT_SOURCES
      ${PROJECT_SOURCE_DIR}/src/main.cpp
@@ -104,7 +116,7 @@ set( PROJECT_SOURCES
 	- The `include_directories()` command adds directories to the compiler's header search path, allowing your project to find header files (*.h, *.hpp) during compilation.
 	- Example: include_directories( ${PROJECT_INCLUDES} )
 
-```sh
+```
 # Add a single directory
 include_directories(${PROJECT_SOURCE_DIR}/api)
 
@@ -120,7 +132,7 @@ include_directories(
 - `add_executable()` Command:
 	- The `add_executable()` command defines an executable target (a program you can run) from a list of source files (.cpp, .c, etc.).
 	
-```sh
+```
 add_executable(<target_name> [WIN32] [MACOSX_BUNDLE] [EXCLUDE_FROM_ALL] source1 [source2 ...])
 
 * <target_name>: Name of the executable (e.g., my_app).
@@ -133,7 +145,7 @@ add_executable(<target_name> [WIN32] [MACOSX_BUNDLE] [EXCLUDE_FROM_ALL] source1 
 
 Example:  
 
-```sh
+```
 # Add executable target.
 add_executable(${PROJECT_NAME} src/main.cpp)
 
@@ -149,9 +161,9 @@ add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
 - Project Information Variables:
 
-```sh
+```
 Variable              Description                                               Example
-
+------------------    ------------------------------------------------------    ---------------------------
 PROJECT_NAME	      Name of the most recent project() call.	                "MyProject"
 PROJECT_SOURCE_DIR    Full path to the source directory of the project.	        /home/user/my_project
 PROJECT_BINARY_DIR    Full path to the build directory (where cmake runs).      /home/user/my_project/build
@@ -160,9 +172,9 @@ CMAKE_PROJECT_NAME    Name of the top-level project (useful in subprojects).    
 
 - Directory Paths:
 
-```sh
+```
 Variable                    Description                                        Example
-
+------------------------    -----------------------------------------------    -------------------------------
 CMAKE_SOURCE_DIR            Path to the top-level source directory.            /home/user/my_project
 CMAKE_BINARY_DIR            Path to the top-level build directory.             /home/user/my_project/build
 CMAKE_CURRENT_SOURCE_DIR    Path to the current CMakeLists.txt's directory.    /home/user/my_project/src
@@ -171,9 +183,9 @@ CMAKE_CURRENT_BINARY_DIR    Build directory for the current CMakeLists.txt.    /
 
 - System & Compiler Info:
 
-```sh
+```
 Variable              Description                                         Example
-
+------------------    ------------------------------------------------    ------------
 CMAKE_SYSTEM_NAME     Operating system (e.g., Linux, Windows, Darwin).    "Linux"
 CMAKE_C_COMPILER      Path to the C compiler.                             /usr/bin/gcc
 CMAKE_CXX_COMPILER    Path to the C++ compiler.                           /usr/bin/g++
@@ -182,9 +194,9 @@ CMAKE_BUILD_TYPE      Build type (Debug, Release, RelWithDebInfo).        "Debug
 
 - Build Control Variables:
 
-```sh
+```
 Variable                Description                                     Example
-
+--------------------    --------------------------------------------    -------------------------
 CMAKE_CXX_FLAGS         C++ compiler flags.                             "-Wall -Wextra"
 CMAKE_INSTALL_PREFIX    Installation prefix (/usr/local by default).    "/opt/my_project"
 CMAKE_MODULE_PATH       Paths to search for CMake modules.              "/path/to/custom/modules"
@@ -192,18 +204,18 @@ CMAKE_MODULE_PATH       Paths to search for CMake modules.              "/path/t
 
 - Generator-Specific Variables:
 
-```sh
-Variable              Description                                             Example
-
+```
+Variable              Description                                              Example
+------------------    -----------------------------------------------------    ----------------
 CMAKE_GENERATOR       Build system generator (e.g., Unix Makefiles, Ninja).    "Unix Makefiles"
 CMAKE_MAKE_PROGRAM    Path to the build tool (e.g., make, ninja).              /usr/bin/ninja
 ```
 
 - Platform-Specific Variables:
 
-```sh
+```
 Variable    Description                                          Example
-
+--------    -------------------------------------------------    -------------
 WIN32       TRUE on Windows systems.                             FALSE (Linux)
 APPLE       TRUE on macOS/iOS.                                   TRUE (macOS)
 UNIX        TRUE on Linux, macOS, or other Unix-like systems.    TRUE
@@ -211,9 +223,9 @@ UNIX        TRUE on Linux, macOS, or other Unix-like systems.    TRUE
 
 - Dependency Management:
 
-```sh
+```
 Variable               Description                                         Example
-
+-------------------    ------------------------------------------------    ----------------------
 CMAKE_PREFIX_PATH      Paths to search for dependencies.                   "/usr/local;/opt/libs"
 <PackageName>_FOUND    TRUE if a package is found (e.g., OpenCV_FOUND).    TRUE
 ```
